@@ -23,8 +23,12 @@
     </div>
     <div class="form-group">
         <label class="text-info font-weight-bold pl-3" for="categoria">Categoría</label>
-        <input type="text" class="form-control" id="categoria" name="categoria" value="<?= $libro['categoria'];  ?>">
-        <small id="categoriaError" class="form-text text-muted"></small>
+        <select class="form-control" id="categorias" name="categoria">
+            <option value="<?= $libro['categoria'];  ?>" selected disabled><?= $libro['nombre_cat'];  ?></option>
+            <?php foreach ($categorias as $categoria) : ?>
+                <option value="<?= $categoria['id_categoria']; ?>"><?= $categoria['nombre_cat']; ?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
     <div class="form-group">
         <label class="text-info font-weight-bold pl-3" for="resumen">Resumen</label>

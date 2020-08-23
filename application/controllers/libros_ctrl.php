@@ -34,6 +34,8 @@ class Libros_ctrl extends CI_Controller
     {
         $data['title'] = 'Añadir libro a la biblioteca';
 
+        $data['categorias'] = $this->categorias_M->get_categorias();
+
         $this->form_validation->set_rules('titulo', 'Título', 'required');
         $this->form_validation->set_rules('autor', 'Autor', 'required');
         $this->form_validation->set_rules('editorial', 'Editorial', 'required');
@@ -44,7 +46,27 @@ class Libros_ctrl extends CI_Controller
             $this->load->view('libros/create', $data);
             $this->load->view('components/footer');
         } else {
-            $this->libros_mdl->create_Book();
+            //Cargamos la imagen si el formulario pasa la validación
+            $config['upload_path'] = './assets/img/libros';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '2048';
+            $config['max_width'] = '2500';
+            $config['max_height'] = '2500';
+
+            //Cargamos la librería para cargar archivos
+            $this->load->library('upload', $config);
+
+            //Comprobamos si el archivo se ha cargado
+            if(!$this->upload->do_upload()){
+                $errors = array('error' => $this->upload->display_errors());
+                var_dump($errors);
+                $imagen = 'no_image.jpg';
+            }else {
+                $data = array('upload_data' => $this->upload->data());
+                $imagen = $_FILES['userfile']['name'];
+            }
+
+            $this->libros_mdl->create_Book($imagen);
             redirect('libros');
         }
     }
@@ -53,6 +75,7 @@ class Libros_ctrl extends CI_Controller
     {
         $data['libro'] = $this->libros_mdl->get_books($url);
         $data['title'] = 'Editar datos del libro';
+        $data['categorias'] = $this->categorias_M->get_categorias();
 
         $this->load->view('components/header');
         $this->load->view('libros/edit', $data);

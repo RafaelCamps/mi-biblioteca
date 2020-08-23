@@ -14,16 +14,19 @@ class Libros_mdl extends CI_Model
         if ($url === FALSE) {
             //Para ordenar los datos que solicitamos
             $this->db->order_by('titulo');
+            //Para hacer un join con otra tabla
+            $this->db->join('categorias', 'categorias.id_categoria = libros.categoria');
             //libros es la tabla de la que queremos recoger los datos
             $query = $this->db->get('libros');
             return $query->result_array();
         }
 
+        $this->db->join('categorias', 'categorias.id_categoria = libros.categoria');
         $query = $this->db->get_where('libros', array('url' => $url));
         return $query->row_array();
     }
 
-    public function create_book()
+    public function create_book($imagen)
     {
         $url = url_title(htmlspecialchars($this->input->post('titulo')));
 
@@ -33,7 +36,8 @@ class Libros_mdl extends CI_Model
             'autor' => $this->input->post('autor'),
             'editorial' => $this->input->post('editorial'),
             'categoria' => $this->input->post('categoria'),
-            'resumen' => $this->input->post('resumen')
+            'resumen' => $this->input->post('resumen'),
+            'imagen' => $imagen
         );
 
         return $this->db->insert('libros', $data);

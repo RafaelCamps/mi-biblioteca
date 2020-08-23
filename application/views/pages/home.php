@@ -6,18 +6,19 @@
     </div>
     <div class="row mb-4">
         <article class="col-12 col-md-9">
-            <h2>Últimos libros añadidos</h2>
+            <h2 class="text-secondary border-bottom border-info pb-2 mb-2">Últimos libros añadidos</h2>
             <div class="d-flex flex-wrap">
                 <?php //var_dump($libros); 
                 ?>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                <div class="row row-cols-1 row-cols-lg-2">
                     <?php foreach ($libros as $libro) : ?>
                         <div class="col mb-4">
                             <div class="card h-100">
-                                <img src="<?= base_url()  ?>assets/img/libros/no-image.png" class="card-img-top" alt="...">
+                                <img class="img-fluid" src="<?= base_url();  ?>assets/img/libros/<?= $libro['imagen']; ?>" alt="Imagen de portada de <?= $libro['titulo']; ?>">
                                 <div class="card-body d-flex flex-column justify-content-between">
-                                    <h5 class="card-title text-info text-center h4 mb-3"><a class="mb-2 text-decoration-none stretched-link" href="<?= base_url() ?>libros/<?= $libro['url']; ?>"><?= $libro['titulo']; ?></a></h5>
-                                    <p class="card-text text-center"><?= $libro['categoria']; ?>
+                                    <h3 class="card-title text-info text-center h3 mb-3"><a class="mb-2 text-decoration-none stretched-link" href="<?= base_url() ?>libros/<?= $libro['url']; ?>"><?= $libro['titulo']; ?></a></h3>
+                                    <h4 class="text-center"><?= $libro['autor']; ?></h4>
+                                    <p class="card-text text-center text-primary badge badge-pill badge-light mt-3 py-2"><?= $libro['nombre_cat']; ?>
 
                                     </p>
 

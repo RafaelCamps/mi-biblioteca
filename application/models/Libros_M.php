@@ -1,6 +1,6 @@
 <?php
 
-class Libros_mdl extends CI_Model
+class Libros_M extends CI_Model
 {
 
     public function __construct()
@@ -24,6 +24,19 @@ class Libros_mdl extends CI_Model
         $this->db->join('categorias', 'categorias.id_categoria = libros.categoria');
         $query = $this->db->get_where('libros', array('url' => $url));
         return $query->row_array();
+    }
+
+    public function get_new_books()
+    {
+        $this->db->order_by('id_libro', 'DESC');
+        $this->db->join('categorias', 'categorias.id_categoria = libros.categoria');
+        $query = $this->db->get('libros');
+        return $query->result_array();
+    }
+
+    public function get_books_by_category($id_categoria){
+        $query = $this->db->get_where('libros', array('categoria' => $id_categoria));
+        return $query->result_array();
     }
 
     public function create_book($imagen)

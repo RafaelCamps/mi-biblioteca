@@ -8,7 +8,7 @@ class Libros_ctrl extends CI_Controller
     {
         $data['title'] = 'Listado de Libros';
 
-        $data['libros'] = $this->libros_mdl->get_books();
+        $data['libros'] = $this->libros_M->get_books();
 
         $this->load->view('components/header');
         $this->load->view('libros/index', $data);
@@ -17,7 +17,7 @@ class Libros_ctrl extends CI_Controller
 
     public function view($url = NULL)
     {
-        $data['libro'] = $this->libros_mdl->get_books($url);
+        $data['libro'] = $this->libros_M->get_books($url);
 
         if (empty($data['libro'])) {
             show_404();
@@ -66,14 +66,14 @@ class Libros_ctrl extends CI_Controller
                 $imagen = $_FILES['userfile']['name'];
             }
 
-            $this->libros_mdl->create_Book($imagen);
+            $this->libros_M->create_Book($imagen);
             redirect('libros');
         }
     }
 
     public function edit($url)
     {
-        $data['libro'] = $this->libros_mdl->get_books($url);
+        $data['libro'] = $this->libros_M->get_books($url);
         $data['title'] = 'Editar datos del libro';
         $data['categorias'] = $this->categorias_M->get_categorias();
 
@@ -84,14 +84,14 @@ class Libros_ctrl extends CI_Controller
 
     public function update()
     {
-        $this->libros_mdl->update_book();
+        $this->libros_M->update_book();
         redirect('libros');
     }
 
 
     public function delete($id)
     {
-        $this->libros_mdl->delete_book($id);
+        $this->libros_M->delete_book($id);
         redirect('libros');
     }
 }

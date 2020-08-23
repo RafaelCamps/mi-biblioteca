@@ -6,19 +6,20 @@ class Pages_ctrl extends CI_Controller
 
     public function view($page = 'home')
     {
-        if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
+        if (!file_exists(APPPATH . 'views/pages/' . $page . '.php')) {
             show_404();
         }
 
         $data['title'] = ucfirst($page);
 
-        if($page === 'home'){
-            $data['libros'] = $this->libros_mdl->get_books();
+        if ($page === 'home') {
+            $data['libros'] = $this->libros_M->get_books();
+            $data['nuevos'] = $this->libros_M->get_new_books();
         }
 
 
         $this->load->view('components/header');
-        $this->load->view('pages/'.$page, $data);
+        $this->load->view('pages/' . $page, $data);
         $this->load->view('components/footer');
     }
 }

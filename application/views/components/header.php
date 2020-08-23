@@ -38,8 +38,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="dropdown-divider text-info"></div>
                             <a class="dropdown-item" href="<?= base_url(); ?>libros">Ver todos</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?= base_url(); ?>libros">Por categorías</a>
-                            <a class="dropdown-item" href="<?= base_url(); ?>libros">Por autor</a>
+                            <a class="dropdown-item" href="<?= base_url(); ?>categorias/liderazgo">Por categorías</a>
                         </div>
                     </li>
                     <li class="nav-item">

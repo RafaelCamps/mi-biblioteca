@@ -32,12 +32,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
+$route['categorias/(:any)'] = 'categorias_C/view/$1';
+$route['categorias'] = 'categorias_C';
+
 $route['libros/update'] = 'libros_ctrl/update';
 $route['libros/borrar/(:any)'] = 'libros_ctrl/delete/$1';
 $route['libros/editar/(:any)'] = 'libros_ctrl/edit/$1';
 $route['libros/nuevo'] = 'libros_ctrl/create';
 $route['libros/(:any)'] = 'libros_ctrl/view/$1';
 $route['libros'] = 'libros_ctrl';
+
 $route['(:any)'] = 'pages_ctrl/view/$1';
 $route['default_controller'] = 'pages_ctrl/view';
 $route['404_override'] = '';

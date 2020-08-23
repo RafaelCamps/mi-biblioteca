@@ -22,10 +22,8 @@
                                 <div>
                                     <p class="text-secondary d-flex justify-content-between"><small>Editorial: <?= $libro['editorial']; ?></small><small>Categoría: <span class="text-info"><?= $libro['nombre_cat']; ?></span> </small></p>
                                     <!-- <p><?= $libro['resumen']; ?></p> -->
-                                    <p><a class="btn btn-info btn-block stretched-link " href="<?= site_url('/libros/') . $libro['url']; ?>">Ver ficha</a></p>
+                                    <p><a class="btn btn-info btn-block " href="<?= site_url('libros/');?><?= $libro['url']; ?>">Ver ficha</a></p>
                                 </div>
-
-
                             </div>
                         </article>
                     <?php endforeach; ?>
